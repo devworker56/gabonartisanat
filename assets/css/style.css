@@ -1,0 +1,288 @@
+:root {
+    --amazon-orange: #ff9900;
+    --amazon-dark: #131921;
+    --amazon-light-dark: #232f3e;
+    --amazon-light: #f0f2f2;
+    --amazon-text-dark: #0F1111;
+    --amazon-text-light: #cccccc;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--amazon-text-dark);
+    background-color: #fafafa;
+}
+
+/* Header styles - Amazon inspired */
+.navbar-amazon {
+    background-color: var(--amazon-dark);
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.nav-link {
+    color: #fff !important;
+    font-size: 14px;
+    padding: 8px 9px !important;
+}
+
+.nav-link:hover {
+    outline: 1px solid white;
+}
+
+.sub-nav {
+    background-color: var(--amazon-light-dark);
+    padding: 5px 0;
+}
+
+.sub-nav .nav-link {
+    font-size: 13px;
+}
+
+.logo {
+    color: #fff;
+    font-weight: bold;
+    font-size: 24px;
+    text-decoration: none;
+}
+
+.logo span {
+    color: var(--amazon-orange);
+}
+
+.search-bar {
+    flex-grow: 1;
+    max-width: 800px;
+    margin: 0 15px;
+}
+
+.search-bar .form-select {
+    border-radius: 4px 0 0 4px;
+    background-color: #f3f3f3;
+}
+
+.search-bar .btn-orange {
+    background-color: var(--amazon-orange);
+    border-color: var(--amazon-orange);
+    border-radius: 0 4px 4px 0;
+}
+
+.cart-btn {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    padding: 5px 9px;
+    position: relative;
+}
+
+.cart-count {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: var(--amazon-orange);
+    color: var(--amazon-dark);
+    font-size: 12px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+/* Product card - Amazon style */
+.product-card {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 15px;
+    height: 100%;
+    transition: all 0.3s;
+    position: relative;
+}
+
+.product-card:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transform: translateY(-3px);
+}
+
+.product-image {
+    height: 180px;
+    object-fit: contain;
+    margin-bottom: 15px;
+}
+
+.product-title {
+    font-size: 16px;
+    height: 40px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.product-province {
+    font-size: 12px;
+    color: #565959;
+    margin-bottom: 5px;
+}
+
+.product-rating {
+    color: var(--amazon-orange);
+    margin-bottom: 8px;
+}
+
+.product-price {
+    font-size: 20px;
+    font-weight: bold;
+    color: #B12704;
+    margin-bottom: 10px;
+}
+
+.prime-badge {
+    color: #565959;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.prime-badge i {
+    color: #146eb4;
+    margin-right: 5px;
+}
+
+/* Hero section */
+.hero-section {
+    background: linear-gradient(to right, #2a3a4a, #1a252f);
+    color: white;
+    padding: 40px 0;
+    margin-bottom: 30px;
+}
+
+/* Footer */
+.footer {
+    background-color: var(--amazon-light-dark);
+    color: white;
+    padding: 40px 0 20px;
+    margin-top: 40px;
+}
+
+.footer a {
+    color: #ddd;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    color: white;
+    text-decoration: underline;
+}
+
+.footer-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.footer-list {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-list li {
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.footer-bottom {
+    background-color: var(--amazon-dark);
+    padding: 20px 0;
+    text-align: center;
+    font-size: 13px;
+    color: #999;
+    margin-top: 30px;
+}
+
+/* Province badges */
+.province-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: var(--amazon-orange);
+    color: white;
+    padding: 3px 8px;
+    border-radius: 3px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.btn-amazon {
+    background-color: var(--amazon-orange);
+    border-color: #a88734 #9c7e31 #846a29;
+    color: #111;
+    padding: 6px 20px;
+    border-radius: 3px;
+    font-size: 13px;
+    text-transform: none;
+    font-weight: 500;
+}
+
+.btn-amazon:hover {
+    background-color: #f0c14b;
+    border-color: #a88734 #9c7e31 #846a29;
+}
+
+/* Admin sidebar */
+.admin-sidebar {
+    background-color: var(--amazon-light-dark);
+    min-height: 100vh;
+    width: 250px;
+    padding: 20px 0;
+}
+
+.admin-sidebar .nav-link {
+    color: #ddd !important;
+    padding: 10px 20px !important;
+    border-radius: 0;
+}
+
+.admin-sidebar .nav-link.active {
+    background-color: var(--amazon-orange);
+    color: #000 !important;
+    font-weight: 500;
+}
+
+.admin-sidebar .nav-link:hover {
+    background-color: #3a4a5a;
+    outline: none;
+}
+
+.admin-content {
+    flex: 1;
+    padding: 20px;
+}
+
+.seller-dashboard-card {
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s;
+    height: 100%;
+}
+
+.seller-dashboard-card:hover {
+    transform: translateY(-5px);
+}
+
+.seller-dashboard-card .card-header {
+    padding: 15px;
+    font-weight: 500;
+}
+
+.seller-dashboard-card .card-body {
+    padding: 20px;
+}
+
+.seller-stats-number {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}

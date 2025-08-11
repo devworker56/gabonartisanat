@@ -8,14 +8,16 @@ class Database {
     private function __construct() {
         try {
             $this->connection = new PDO(
-                "mysql:host=".DB_HOST.";dbname=".DB_NAME, 
+                "mysql:host=".DB_HOST.";dbname=".DB_NAME.";charset=utf8mb4", 
                 DB_USER, 
                 DB_PASS
             );
             $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $this->connection->exec("SET NAMES 'utf8'");
+            $this->connection->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+            $this->connection->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
         } catch(PDOException $e) {
-            die("Erreur de connexion à la base de données: " . $e->getMessage());
+            error_log("Database connection error: " . $e->getMessage());
+            die("Erreur de connexion à la base de données. Veuillez réessayer plus tard.");
         }
     }
     
@@ -35,9 +37,19 @@ class Database {
     }
 }
 
-// Fonction utilitaire pour obtenir la connexion
+/**
+ * Get database connection instance
+ * @return PDO
+ */
 function getDB() {
-    $db = Database::getInstance();
-    return $db->getConnection();
+    return Database::getInstance()->getConnection();
 }
-?>
+
+/**
+ * Log errors to file
+ */
+function logError($message) {
+    $logFile = __DIR__ . '/../logs/database_errors.log';
+    $timestamp = date('Y-m-d H:i:s');
+    file_put_contents($logFile, "[$timestamp] $message\n", FILE_APPEND);
+}

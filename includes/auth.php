@@ -1,9 +1,23 @@
 <?php
+require_once 'config.php';  // Add this line to include config
 require_once 'functions.php';
+require_once 'db_connect.php';  // Add this line for database connection
 
-// Démarrer la session si elle n'est pas déjà démarrée
+// Démarrer la session si elle n'est pas démarrée
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
+}
+
+/**
+ * Validate API key for external requests
+ */
+function validateApiKey($authHeader) {
+    if (empty($authHeader)) {
+        return false;
+    }
+    
+    $expected = 'Bearer ' . MPG_API_KEY;
+    return trim($authHeader) === $expected;
 }
 
 /**
@@ -134,4 +148,55 @@ function logoutUser() {
     header("Location: connexion.php");
     exit();
 }
-?>
+
+/**
+ * Role checking functions
+ */
+function isAdmin() {
+    return isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin';
+}
+
+function isSeller() {
+    return isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'vendeur';
+}
+
+function isClient() {
+    return isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'client';
+}
+
+function isLoggedIn() {
+    return isset($_SESSION['user_id']);
+}
+
+/**
+ * Generate JWT token for API authentication
+ */
+function generateJWT($payload) {
+    $header = json_encode(['typ' => 'JWT', 'alg' => 'HS256']);
+    $payload = json_encode($payload);
+    
+    $base64UrlHeader = str_replace(['+', '/', '='], ['-', '_', ''], base64_encode($header));
+    $base64UrlPayload = str_replace(['+', '/', '='], ['-', '_', ''], base64_encode($payload));
+    
+    $signature = hash_hmac('sha256', $base64UrlHeader . "." . $base64UrlPayload, JWT_SECRET, true);
+    $base64UrlSignature = str_replace(['+', '/', '='], ['-', '_', ''], base64_encode($signature));
+    
+    return $base64UrlHeader . "." . $base64UrlPayload . "." . $base64UrlSignature;
+}
+
+/**
+ * Validate JWT token
+ */
+function validateJWT($token) {
+    try {
+        $parts = explode('.', $token);
+        if (count($parts) !== 3) return false;
+        
+        $signature = hash_hmac('sha256', $parts[0] . "." . $parts[1], JWT_SECRET, true);
+        $base64UrlSignature = str_replace(['+', '/', '='], ['-', '_', ''], base64_encode($signature));
+        
+        return hash_equals($base64UrlSignature, $parts[2]);
+    } catch (Exception $e) {
+        return false;
+    }
+}

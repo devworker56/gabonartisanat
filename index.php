@@ -1,7 +1,9 @@
 <?php
-require_once '../includes/auth.php';
+require_once __DIR__ . '/../includes/auth.php';
 ?>
-<?php include '../includes/header.php'; ?>
+<?php
+require_once __DIR__ . '/../includes/header.php';
+?>
 
 <!-- Hero Banner (Original Height) -->
 <div class="hero-section" style="background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1564501049412-61c2a3083791?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;">
